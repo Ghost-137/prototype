@@ -44,6 +44,6 @@ export const clientContent = {
     description: "A private, 60-minute deep dive tailored entirely to your personal journey, growth, and alignment. Let's create your path forward together.",
     buttonText: "Secure Your Time Slot",
     subtext: "Free consultation • Instantly added to your calendar",
-    calendlyUrl: "https://calendly.com/your-username/1-1-session"
+    calendlyUrl: "https://calendly.com/mehedi35-3096-diu/30min"
   },
 };
