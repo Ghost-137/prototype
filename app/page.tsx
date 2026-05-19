@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { clientContent } from "./contentData";
 
@@ -14,30 +14,46 @@ declare global {
 
 export default function LandingPage() {
   const { brand, hero, coachingSection, aboutMe, booking } = clientContent;
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
-  const openCalendly = () => {
+  // Safely inject the external scripts into the DOM at runtime
+  useEffect(() => {
+    // 1. Inject Style sheet
+    const link = document.createElement("link");
+    link.href = "https://assets.calendly.com/assets/external/widget.css";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+
+    // 2. Inject Code Engine script
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.onload = () => setScriptLoaded(true);
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup on component unmount
+      document.head.removeChild(link);
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const openCalendly = (e: React.MouseEvent) => {
+    e.preventDefault(); // Stop any browser route handling
+    
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
         url: booking.calendlyUrl,
       });
     } else {
-      console.warn("Calendly script hasn't loaded fully yet.");
+      // Fallback: If script execution fails, open your booking channel directly in a new tab
+      window.open(booking.calendlyUrl, "_blank");
     }
   };
 
   return (
     <div className="min-h-screen bg-[#faf8f5] text-[#2c2a29] font-sans antialiased">
-      {/* Native HTML loading anchors to prevent Next.js basePath path corruption */}
-      <link
-        href="https://assets.calendly.com/assets/external/widget.css"
-        rel="stylesheet"
-      />
-      <script
-        src="https://assets.calendly.com/assets/external/widget.js"
-        type="text/javascript"
-        async
-      />
-
       {/* Navigation Header */}
       <header className="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
         <div className="text-xl font-serif tracking-wider uppercase font-semibold text-[#4a4744]">
