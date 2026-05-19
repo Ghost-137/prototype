@@ -14,7 +14,8 @@ export const clientContent = {
       "Like the gentle, intentional transitions we practice at EloMotions, this collaborative coaching container is designed entirely around your pace. No rigid structures—just honest, powerful spaces for reflection.",
     ],
     profileImage: {
-      src: "/images/main.png",
+      // Maps correctly to /prototype/images/main.png on production build
+      src: process.env.NODE_ENV === 'production' ? '/prototype/images/main.png' : '/images/main.png',
       alt: "Eveliina Elomaa - EloMotions Founder",
     },
   },
@@ -32,7 +33,8 @@ export const clientContent = {
       "In my coaching, I don't offer ready-made answers. I create a space where you can find yours. My work is based on both my professional education and the lessons life has taught me — both are needed."
     ],
     image: {
-      src: "/images/secondmain.png",
+      // Maps correctly to /prototype/images/secondmain.png on production build
+      src: process.env.NODE_ENV === 'production' ? '/prototype/images/secondmain.png' : '/images/secondmain.png',
       alt: "Eveliina Elomaa - Meditation and Reflection Space"
     }
   },
@@ -42,6 +44,6 @@ export const clientContent = {
     description: "A private, 60-minute deep dive tailored entirely to your personal journey, growth, and alignment. Let's create your path forward together.",
     buttonText: "Secure Your Time Slot",
     subtext: "Free consultation • Instantly added to your calendar",
-    calendlyUrl: "https://calendly.com/mehedi35-3096-diu/30min"
+    calendlyUrl: "https://calendly.com/your-username/1-1-session"
   },
 };
