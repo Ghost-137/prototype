@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import Script from "next/script";
 import { clientContent } from "./contentData";
 
 declare global {
@@ -28,16 +27,18 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-[#faf8f5] text-[#2c2a29] font-sans antialiased">
+      {/* Native HTML loading anchors to prevent Next.js basePath path corruption */}
       <link
         href="https://assets.calendly.com/assets/external/widget.css"
         rel="stylesheet"
       />
-      <Script
+      <script
         src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="afterInteractive"
+        type="text/javascript"
+        async
       />
 
-      {/* Navigation */}
+      {/* Navigation Header */}
       <header className="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
         <div className="text-xl font-serif tracking-wider uppercase font-semibold text-[#4a4744]">
           {brand.logoText}
@@ -127,35 +128,34 @@ export default function LandingPage() {
         </div>
       </main>
 
-      {/* BEAUTIFUL LIGHT-COLOR COACHING SERVICES SHOWCASE */}
-      {/* BEAUTIFUL LIGHT SAGE GREEN COACHING SERVICES SHOWCASE */}
-<section
-  id="coaching"
-  className="border-t border-[#e2e7e0] bg-[#f1f4f0] py-24"
->
-  <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
-    <div className="space-y-4">
-      <h2 className="text-xs uppercase tracking-widest text-[#8a9687] font-bold">
-        {coachingSection.title}
-      </h2>
-      <p className="text-2xl sm:text-3xl font-serif font-light text-[#2d332c] leading-relaxed max-w-2xl mx-auto tracking-wide">
-        {coachingSection.description}
-      </p>
-    </div>
-    
-    <div className="pt-6">
-      <p className="text-sm italic font-serif text-[#8a9687] mb-5">
-        {coachingSection.tagline}
-      </p>
-      <button
-        onClick={openCalendly}
-        className="inline-block border-b border-[#2d332c] text-[#2d332c] hover:text-[#8a9687] hover:border-[#8a9687] text-xs uppercase tracking-widest font-semibold pb-1.5 transition-all cursor-pointer bg-transparent tracking-widest"
+      {/* Muted Sage Green Coaching Showcase Section */}
+      <section
+        id="coaching"
+        className="border-t border-[#e2e7e0] bg-[#f1f4f0] py-24"
       >
-        Book discovery call &rarr;
-      </button>
-    </div>
-  </div>
-</section>
+        <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
+          <div className="space-y-4">
+            <h2 className="text-xs uppercase tracking-widest text-[#8a9687] font-bold">
+              {coachingSection.title}
+            </h2>
+            <p className="text-2xl sm:text-3xl font-serif font-light text-[#2d332c] leading-relaxed max-w-2xl mx-auto tracking-wide">
+              {coachingSection.description}
+            </p>
+          </div>
+          
+          <div className="pt-6">
+            <p className="text-sm italic font-serif text-[#8a9687] mb-5">
+              {coachingSection.tagline}
+            </p>
+            <button
+              onClick={openCalendly}
+              className="inline-block border-b border-[#2d332c] text-[#2d332c] hover:text-[#8a9687] hover:border-[#8a9687] text-xs uppercase tracking-widest font-semibold pb-1.5 transition-all cursor-pointer bg-transparent tracking-widest"
+            >
+              Book discovery call &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* SECTION 2: THE "ABOUT EVELIINA" BIO FOLD */}
       <section
